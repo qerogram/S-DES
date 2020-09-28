@@ -74,8 +74,11 @@ class sdes() :
 
         print(f"[-] Find Index : S0[{row}, {column}] = {bin(self.S0[row][column])[2:]}(2)")
         print(f"[-] Find Index : S1[{row2}, {column2}] = {bin(self.S1[row2][column2])[2:]}(2)")
-        
-        result = bin(self.S0[row][column])[2:] + bin(self.S1[row2][column2])[2:]
+        s_0 = bin(self.S0[row][column])[2:]
+        s_1 = bin(self.S1[row2][column2])[2:]
+        if len(s_0) == 1 : s_0 = "0" + s_0
+        if len(s_1) == 1 : s_1 = "0" + s_1
+        result = s_0 + s_1
         print(f"[-] Concat result : {result}")
 
         # P4
@@ -87,6 +90,7 @@ class sdes() :
         
         # XOR
         result = bin(int(P4_result, 2) ^ int(IP_High, 2))[2:]
+        result = (4 - len(result)) * "0" + result
         print(f"[-] XOR IP_High(4bit) : {P4_result} ^ {IP_High} = {result}")
 
         result += IP_Low
@@ -119,7 +123,11 @@ class sdes() :
         print(f"[-] Find Index : S0[{row}, {column}] = {bin(self.S0[row][column])[2:]}(2)")
         print(f"[-] Find Index : S1[{row2}, {column2}] = {bin(self.S1[row2][column2])[2:]}(2)")
 
-        result = bin(self.S0[row][column])[2:] + bin(self.S1[row2][column2])[2:]
+        s_0 = bin(self.S0[row][column])[2:]
+        s_1 = bin(self.S1[row2][column2])[2:]
+        if len(s_0) == 1 : s_0 = "0" + s_0
+        if len(s_1) == 1 : s_1 = "0" + s_1
+        result = s_0 + s_1
         print(f"[-] Concat result : {result}")
 
         # P4
@@ -130,6 +138,7 @@ class sdes() :
         
         # XOR
         result = bin(int(P4_result, 2) ^ int(SW_High, 2))[2:]
+        result = (4 - len(result)) * "0" + result
         print(f"[-] XOR SW_High(4bit) : {P4_result} ^ {SW_High}(SW_High) = {result}")
 
         # IP -1
@@ -176,7 +185,11 @@ class sdes() :
         print(f"[-] Find Index : S0[{row}, {column}] = {bin(self.S0[row][column])[2:]}(2)")
         print(f"[-] Find Index : S1[{row2}, {column2}] = {bin(self.S1[row2][column2])[2:]}(2)")
         
-        result = bin(self.S0[row][column])[2:] + bin(self.S1[row2][column2])[2:]
+        s_0 = bin(self.S0[row][column])[2:]
+        s_1 = bin(self.S1[row2][column2])[2:]
+        if len(s_0) == 1 : s_0 = "0" + s_0
+        if len(s_1) == 1 : s_1 = "0" + s_1
+        result = s_0 + s_1
         print(f"[-] Concat result : {result}")
         
         # P4
@@ -223,7 +236,11 @@ class sdes() :
         print(f"[-] Find Index : S0[{row}, {column}] = {bin(self.S0[row][column])[2:]}(2)")
         print(f"[-] Find Index : S1[{row2}, {column2}] = {bin(self.S1[row2][column2])[2:]}(2)")
 
-        result = bin(self.S0[row][column])[2:] + bin(self.S1[row2][column2])[2:]
+        s_0 = bin(self.S0[row][column])[2:]
+        s_1 = bin(self.S1[row2][column2])[2:]
+        if len(s_0) == 1 : s_0 = "0" + s_0
+        if len(s_1) == 1 : s_1 = "0" + s_1
+        result = s_0 + s_1
         print(f"[-] Concat result : {result}")
 
         # P4
@@ -256,6 +273,7 @@ class sdes() :
         # P10
         for element in self.P10 :
             result += self.key[element - 1]
+
         print(f"[-] P10 Apply : {result}")
         
         # LS1
@@ -299,5 +317,5 @@ class sdes() :
         return data[2:] + data[:2]
 
 if __name__ == "__main__" :
-    s = sdes('1010000010', '01110010')
-    print(s.encrypt())
+    s = sdes('0110101001', '00001010')#'11010100')
+    print(s.decrypt())
